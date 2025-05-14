@@ -1,0 +1,27 @@
+
+name: Build and Save Logs in Shared Folder
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Create Shared Directory and Log File
+        run: |
+          mkdir -p shared/logs
+          echo "Build started at $(date)" > shared/logs/build-log.txt
+          echo "Compiling code..." >> shared/logs/build-log.txt
+          echo "Build completed at $(date)" >> shared/logs/build-log.txt
+
+      - name: Upload Shared Logs as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: shared-logs
+          path: shared/logs/build-log.txt

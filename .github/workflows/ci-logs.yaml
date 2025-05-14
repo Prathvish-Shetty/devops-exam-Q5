@@ -1,0 +1,28 @@
+name: Save Logs in CI/CD (HTML/JS Project)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build-and-log:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set script executable
+      run: chmod +x build.sh
+
+    - name: Run Build Script and Save Log
+      run: |
+        mkdir logs
+        ./build.sh > logs/build-log.txt 2>&1
+
+    - name: Upload Build Logs
+      uses: actions/upload-artifact@v4
+      with:
+        name: html-js-build-logs
+        path: logs/build-log.txt
