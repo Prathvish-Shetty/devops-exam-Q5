@@ -1,4 +1,3 @@
-
 name: Build and Save Logs in Shared Folder
 
 on:
@@ -25,3 +24,7 @@ jobs:
         with:
           name: shared-logs
           path: shared/logs/build-log.txt
+
+
+git config --global user.name "Prathvish-Shetty"
+git config --global user.email "prathvishshetty108@gmail.com"
